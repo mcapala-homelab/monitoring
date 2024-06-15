@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: stack
+  namespace: argocd
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: monitoring
+  project: default
+  sources:
+  - repoURL: 'https://github.com/mcapala-homelab/monitoring.git'
+    targetRevision: master
+    ref: values
+  - repoURL: 'https://grafana.github.io/helm-charts'
+    chart: grafana
+    targetRevision: 8.0.2
+    helm:
+      valueFiles:
+      - $values/values.yaml
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+
