@@ -1,2 +1,2 @@
-# monitoring
-Infrastructure and configuration for monitoring of the homelab
+# Description
+Infrastructure and configuration for monitoring of the homelab.
